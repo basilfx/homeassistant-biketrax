@@ -1,0 +1,15 @@
+{
+  "codeowners": ["@basilfx"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://www.github.com/basilfx/homeassistant-biketrax",
+  "domain": "biketrax",
+  "homekit": {},
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://www.github.com/basilfx/homeassistant-biketrax/issues",
+  "name": "PowUnity BikeTrax",
+  "requirements": ["aiobiketrax==0.1.0"],
+  "ssdp": [],
+  "version": "0.1.0",
+  "zeroconf": []
+}
