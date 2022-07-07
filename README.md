@@ -1,13 +1,24 @@
 # Home Assistant BikeTrax
 Custom component for the PowUnity BikeTrax integration for Home Assistant.
 
+## Introduction
+This custom components adds support for the
+[PowUnity BikeTrax](https://powunity.com/) GPS tracker.
+
+[<img src="docs/images/screenshot.png" width="768" alt="Overview screenshot.">](docs/images/screenshot.png)
+
+## Features
+* Multi-device support
+* Live updates
+* Ability to control alarm, tracking and stolen-state.
+
 ## Installation
 
 ### HACS
 This is the preferred method of installation.
 
-- Search for this integration and install it
-- Restart Home Assistant
+- Search for this integration and install it.
+- Restart Home Assistant.
 - Add a new integration using the web interface, and follow the configuration
   steps.
 
@@ -15,14 +26,9 @@ This is the preferred method of installation.
 - Download the contents of this repository.
 - Copy the `custom_components` folder to your configuration folder. If you
   already have one, then merge its contents.
-- Restart Home Assistant
+- Restart Home Assistant.
 - Add a new integration using the web interface, and follow the configuration
   steps.
-
-## Features
-* Multi-device support
-* Live updates
-* Ability to control alarm, tracking and stolen-state.
 
 ## Known issues
 When read-only mode is enabled, the switches do not reflect this mode properly.
