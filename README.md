@@ -19,17 +19,20 @@ This is the preferred method of installation.
 
 - Search for this integration and install it.
 - Restart Home Assistant.
-- Add a new integration using the web interface, and follow the configuration
-  steps.
 
 ### Manual
 - Download the contents of this repository.
 - Copy the `custom_components` folder to your configuration folder. If you
   already have one, then merge its contents.
 - Restart Home Assistant.
+
+### Configuration
+
 - Add a new integration using the web interface, and follow the configuration
   steps.
 
+  [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=biketrax)
+  
 ## Known issues
 When read-only mode is enabled, the switches do not reflect this mode properly.
 If you try to toggle a switch, it will eventually restore to its actual state.
