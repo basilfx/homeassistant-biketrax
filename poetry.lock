@@ -1,4 +1,17 @@
 [[package]]
+name = "aiobiketrax"
+version = "0.1.0"
+description = "Python library for interacting with the PowUnity BikeTrax GPS tracker."
+category = "main"
+optional = false
+python-versions = ">=3.9,<4.0"
+
+[package.dependencies]
+aiohttp = ">=3.8.1,<4.0.0"
+auth0-python = ">=3.23.1,<4.0.0"
+PyJWT = ">=2.4.0,<3.0.0"
+
+[[package]]
 name = "aiohttp"
 version = "3.8.1"
 description = "Async http client/server framework (asyncio)"
@@ -86,6 +99,21 @@ dev = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", 
 docs = ["furo", "sphinx", "zope.interface", "sphinx-notfound-page"]
 tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "zope.interface"]
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins"]
+
+[[package]]
+name = "auth0-python"
+version = "3.23.1"
+description = "Auth0 Python SDK"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*"
+
+[package.dependencies]
+pyjwt = {version = ">=1.7.1", extras = ["crypto"]}
+requests = ">=2.14.0"
+
+[package.extras]
+test = ["coverage", "mock (>=1.3.0)", "pre-commit"]
 
 [[package]]
 name = "awesomeversion"
@@ -503,6 +531,9 @@ category = "main"
 optional = false
 python-versions = ">=3.6"
 
+[package.dependencies]
+cryptography = {version = ">=3.3.1", optional = true, markers = "extra == \"crypto\""}
+
 [package.extras]
 crypto = ["cryptography (>=3.3.1)"]
 dev = ["sphinx", "sphinx-rtd-theme", "zope.interface", "cryptography (>=3.3.1)", "pytest (>=6.0.0,<7.0.0)", "coverage[toml] (==5.0.4)", "mypy", "pre-commit"]
@@ -699,9 +730,13 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "3bed0556c9b4ddd422c96a1cd9c3d3665136854b7837fa63ce9f1eaebd904932"
+content-hash = "978f11374fb4f4b0cb4baa2b9f4f2ca4fe4492ce34ee1762811f4fe9e35dd318"
 
 [metadata.files]
+aiobiketrax = [
+    {file = "aiobiketrax-0.1.0-py3-none-any.whl", hash = "sha256:7c8559622bba4da009654fed8008b41a37902b2593f9f4760b69e579aaf94975"},
+    {file = "aiobiketrax-0.1.0.tar.gz", hash = "sha256:a03080ae25cf703f3f261168590d9b871994d23e8799bce3079e1d1f2c42a985"},
+]
 aiohttp = [
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:1ed0b6477896559f17b9eaeb6d38e07f7f9ffe40b9f0f9627ae8b9926ae260a8"},
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:7dadf3c307b31e0e61689cbf9e06be7a867c563d5a63ce9dca578f956609abf8"},
@@ -799,6 +834,10 @@ atomicwrites = [
 attrs = [
     {file = "attrs-21.2.0-py2.py3-none-any.whl", hash = "sha256:149e90d6d8ac20db7a955ad60cf0e6881a3f20d37096140088356da6c716b0b1"},
     {file = "attrs-21.2.0.tar.gz", hash = "sha256:ef6aaac3ca6cd92904cdd0d83f629a15f18053ec84e6432106f7a4d04ae4f5fb"},
+]
+auth0-python = [
+    {file = "auth0-python-3.23.1.tar.gz", hash = "sha256:b1711683acebc0cb3ca424a5a09b4b2f7a3b6405d34e231712023bb036a882be"},
+    {file = "auth0_python-3.23.1-py2.py3-none-any.whl", hash = "sha256:360b7db0466bc72a9251a43b9a0c6e7e0a74aa7725a60239990aead3be21d864"},
 ]
 awesomeversion = [
     {file = "awesomeversion-22.5.2-py3-none-any.whl", hash = "sha256:2da07f8d89dcc8a6c1fa8917cff22afa51f43f2b03a011486d8b519fae7e17af"},
