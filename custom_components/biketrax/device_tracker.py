@@ -67,16 +67,12 @@ class BikeTraxDeviceTracker(BikeTraxBaseEntity, TrackerEntity):
     @property
     def latitude(self) -> float | None:
         """Return latitude value of the device."""
-        return (
-            self.device.latitude if self.device.is_tracking_enabled else None
-        )
+        return self.device.latitude if self.device.is_tracking_enabled else None
 
     @property
     def longitude(self) -> float | None:
         """Return longitude value of the device."""
-        return (
-            self.device.longitude if self.device.is_tracking_enabled else None
-        )
+        return self.device.longitude if self.device.is_tracking_enabled else None
 
     @property
     def location_accuracy(self) -> int:

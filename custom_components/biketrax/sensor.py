@@ -145,9 +145,7 @@ class BikeTraxSensor(BikeTraxBaseEntity, SensorEntity):
         """Initialize BikeTrax device sensor."""
         super().__init__(coordinator, device)
 
-        self.entity_id = (
-            f"{SENSOR_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
-        )
+        self.entity_id = f"{SENSOR_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
         self.entity_description = description
 
         self._attr_name = f"{device.name} {description.name}"
@@ -160,9 +158,7 @@ class BikeTraxSensor(BikeTraxBaseEntity, SensorEntity):
 
     @property
     def native_value(self) -> StateType:
-        state = cast(
-            StateType, getattr(self.device, self.entity_description.key)
-        )
+        state = cast(StateType, getattr(self.device, self.entity_description.key))
 
         if (
             self.entity_description.imperial_conversion

@@ -61,9 +61,7 @@ async def async_setup_entry(
     ]
 
     entities = [
-        BikeTraxBinarySensor(
-            coordinators[description.coordinator], device, description
-        )
+        BikeTraxBinarySensor(coordinators[description.coordinator], device, description)
         for description in SENSOR_TYPES
         for device in coordinators[description.coordinator].account.devices
     ]
