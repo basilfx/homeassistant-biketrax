@@ -26,6 +26,6 @@ flake8-mypy = "^17.8.0"
 aiobiketrax = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1"
 black = "^22.3.0"
 isort = "^5.10.1"
