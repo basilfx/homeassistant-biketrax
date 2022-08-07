@@ -24,9 +24,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
 )
 
 
-async def validate_input(
-    hass: HomeAssistant, data: dict[str, Any]
-) -> dict[str, Any]:
+async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
     """Validate the user input allows us to connect.
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
@@ -72,9 +70,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             _LOGGER.exception("Unexpected exception")
             errors["base"] = "unknown"
         else:
-            return self.async_create_entry(
-                title=info["title"], data=user_input
-            )
+            return self.async_create_entry(title=info["title"], data=user_input)
 
         return self.async_show_form(
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
@@ -114,9 +110,7 @@ class BikeTraxOptionsFlow(config_entries.OptionsFlow):
                 options=user_input,
             )
             if changed:
-                await self.hass.config_entries.async_reload(
-                    self.config_entry.entry_id
-                )
+                await self.hass.config_entries.async_reload(self.config_entry.entry_id)
             return self.async_create_entry(title="", data=user_input)
         return self.async_show_form(
             step_id="account_options",
@@ -124,9 +118,7 @@ class BikeTraxOptionsFlow(config_entries.OptionsFlow):
                 {
                     vol.Optional(
                         CONF_READ_ONLY,
-                        default=self.config_entry.options.get(
-                            CONF_READ_ONLY, False
-                        ),
+                        default=self.config_entry.options.get(CONF_READ_ONLY, False),
                     ): bool,
                 }
             ),

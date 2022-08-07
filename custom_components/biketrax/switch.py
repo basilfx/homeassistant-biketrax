@@ -76,9 +76,7 @@ async def async_setup_entry(
     ]
 
     entities = [
-        BikeTraxBinarySensor(
-            coordinators[description.coordinator], device, description
-        )
+        BikeTraxBinarySensor(coordinators[description.coordinator], device, description)
         for description in SWITCH_TYPES
         for device in coordinators[description.coordinator].account.devices
     ]
@@ -100,9 +98,7 @@ class BikeTraxBinarySensor(BikeTraxBaseEntity, SwitchEntity):
         """Initialize switch."""
         super().__init__(coordinator, device)
 
-        self.entity_id = (
-            f"{SWITCH_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
-        )
+        self.entity_id = f"{SWITCH_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
         self.entity_description = description
 
         self._attr_name = f"{device.name} {description.name}"

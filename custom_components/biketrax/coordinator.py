@@ -50,9 +50,7 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
             for device in self.account.devices:
                 await device.update_position()
         except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(
-                f"Error communicating with BikeTrax API: {err}"
-            ) from err
+            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
 
     def start_background_task(self):
         """Start the websocket task."""
@@ -86,9 +84,7 @@ class TripDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
             for device in self.account.devices:
                 await device.update_trips()
         except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(
-                f"Error communicating with BikeTrax API: {err}"
-            ) from err
+            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
 
 
 class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
@@ -114,6 +110,4 @@ class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
             for device in self.account.devices:
                 await device.update_subscription()
         except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(
-                f"Error communicating with BikeTrax API: {err}"
-            ) from err
+            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err

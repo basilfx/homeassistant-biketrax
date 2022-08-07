@@ -18,9 +18,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import CONF_READ_ONLY, DATA_DEVICE, DATA_SUBSCRIPTION, DATA_TRIP, DOMAIN
-from .coordinator import (
-    BikeTraxDataUpdateCoordinator,
-)
+from .coordinator import BikeTraxDataUpdateCoordinator
 
 DEFAULT_OPTIONS = {
     CONF_READ_ONLY: False,
@@ -45,9 +43,7 @@ def _async_migrate_options_from_data_if_missing(
         options = dict(DEFAULT_OPTIONS, **options)
         options[CONF_READ_ONLY] = data.pop(CONF_READ_ONLY, False)
 
-        hass.config_entries.async_update_entry(
-            entry, data=data, options=options
-        )
+        hass.config_entries.async_update_entry(entry, data=data, options=options)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -99,9 +95,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     async def _stop(event: Event) -> None:
         await device_coordinator.stop_background_task()
 
-    entry.async_on_unload(
-        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, _stop)
-    )
+    entry.async_on_unload(hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, _stop))
 
     # Set up all platforms.
     hass.config_entries.async_setup_platforms(entry, PLATFORMS)
@@ -111,9 +105,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
-    if unload_ok := await hass.config_entries.async_unload_platforms(
-        entry, PLATFORMS
-    ):
+    if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         coordinators = hass.data[DOMAIN].pop(entry.entry_id)
 
         # Stop the websocket background task.
