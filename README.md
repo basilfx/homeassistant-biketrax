@@ -26,12 +26,12 @@ This is the preferred method of installation.
   already have one, then merge its contents.
 - Restart Home Assistant.
 
-### Configuration
+## Configuration
+Add a new integration using the web interface, and follow the configuration steps.
 
-- Add a new integration using the web interface, and follow the configuration
-  steps.
+You can also click the button below to get started.
 
-  [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=biketrax)
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=biketrax)
   
 ## Known issues
 When read-only mode is enabled, the switches do not reflect this mode properly.
