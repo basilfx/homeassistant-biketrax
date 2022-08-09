@@ -18,9 +18,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import CONF_READ_ONLY, DATA_DEVICE, DATA_SUBSCRIPTION, DATA_TRIP, DOMAIN
-from .coordinator import (
-    BikeTraxDataUpdateCoordinator,
-)
+from .coordinator import BikeTraxDataUpdateCoordinator
 
 DEFAULT_OPTIONS = {
     CONF_READ_ONLY: False,
