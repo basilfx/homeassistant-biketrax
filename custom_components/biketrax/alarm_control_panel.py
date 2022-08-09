@@ -12,6 +12,7 @@ from homeassistant.const import (
     STATE_ALARM_ARMED_AWAY,
     STATE_ALARM_ARMED_HOME,
     STATE_ALARM_DISARMED,
+    STATE_ALARM_TRIGGERED,
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -42,9 +43,11 @@ async def async_setup_entry(
 class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
     """Representation of a BikeTrax Alarm."""
 
+    _attr_code_arm_required = False
     _attr_supported_features = (
         AlarmControlPanelEntityFeature.ARM_HOME
         | AlarmControlPanelEntityFeature.ARM_AWAY
+        | AlarmControlPanelEntityFeature.TRIGGER
     )
 
     def __init__(
@@ -64,7 +67,9 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
     def state(self):
         """Return the state of the device."""
         return (
-            STATE_ALARM_ARMED_HOME
+            STATE_ALARM_TRIGGERED 
+            if self.device.is_stolen
+            else STATE_ALARM_ARMED_HOME
             if self.device.is_guarded and self._is_home
             else STATE_ALARM_ARMED_AWAY
             if self.device.is_guarded
@@ -85,3 +90,7 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
         """Send arm away command."""
         self._is_home = False
         await self.device.set_guarded(True)
+
+    async def async_alarm_trigger(self, code=None):
+        """Send alarm trigger command."""
+        await self.device.set_stolen(True)
