@@ -68,7 +68,7 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
         """Return the state of the device."""
         return (
             STATE_ALARM_TRIGGERED
-            if self.device.is_stolen
+            if self.device.is_alarm_triggered or self.device.is_stolen
             else STATE_ALARM_ARMED_HOME
             if self.device.is_guarded and self._is_home
             else STATE_ALARM_ARMED_AWAY
