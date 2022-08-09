@@ -67,7 +67,7 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
     def state(self):
         """Return the state of the device."""
         return (
-            STATE_ALARM_TRIGGERED 
+            STATE_ALARM_TRIGGERED
             if self.device.is_stolen
             else STATE_ALARM_ARMED_HOME
             if self.device.is_guarded and self._is_home
