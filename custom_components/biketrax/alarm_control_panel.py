@@ -3,9 +3,7 @@ from __future__ import annotations
 
 from aiobiketrax import Device
 from homeassistant.components.alarm_control_panel import DOMAIN as ALARM_DOMAIN
-from homeassistant.components.alarm_control_panel import (
-    AlarmControlPanelEntity,
-)
+from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity
 from homeassistant.components.alarm_control_panel.const import (
     AlarmControlPanelEntityFeature,
 )
