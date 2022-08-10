@@ -10,6 +10,6 @@
   "name": "PowUnity BikeTrax",
   "requirements": ["aiobiketrax==0.2.0"],
   "ssdp": [],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "zeroconf": []
 }
