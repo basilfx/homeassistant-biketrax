@@ -32,7 +32,7 @@ Add a new integration using the web interface, and follow the configuration step
 You can also click the button below to get started.
 
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=biketrax)
-  
+
 ## Known issues
 When read-only mode is enabled, the switches do not reflect this mode properly.
 If you try to toggle a switch, it will eventually restore to its actual state.
