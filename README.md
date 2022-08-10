@@ -44,6 +44,28 @@ type.
 This custom component builds on top of
 [aiobiketrax](https://github.com/basilfx/aiobiketrax).
 
+### Development version
+If you ever need to use a newer version of `aiobiketrax` with this integration,
+you can edit `custom_components/biketrax/manifest.json` and adapt the
+requirements section to point to a newer version:
+
+```json
+"requirements": [
+  "aiobiketrax @ git+https://github.com/basilfx/aiobiketrax.git@master"
+]
+```
+
+Shut-down Home Assistant, remove the old dependency and then restart
+Home Assistant. The latest version will be fetched from GitHub directly.
+
+Removing a dependency depends on your installation. In a supervised
+installation, you can try the following:
+
+```bash
+docker exec -it homeassistant bash
+pip uninstall aiobiketrax
+```
+
 ## Contributing
 See the [`CONTRIBUTING.md`](CONTRIBUTING.md) file.
 
