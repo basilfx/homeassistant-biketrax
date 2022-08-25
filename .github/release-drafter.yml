@@ -1,0 +1,8 @@
+template: |
+  See the [CHANGELOG.md](https://github.com/$OWNER/$REPOSITORY/blob/master/CHANGELOG.md) for more information.
+
+  ## Changes
+  $CHANGES
+
+  ## Contributors
+  $CONTRIBUTORS
