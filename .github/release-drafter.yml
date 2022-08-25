@@ -1,23 +1,11 @@
 name-template: 'v$NEXT_PATCH_VERSION'
 tag-template: 'v$NEXT_PATCH_VERSION'
-exclude-labels:
-  - 'Meta: Exclude From Changelog'
-  - 'auto-changelog'
-categories:
-  - title: '⤽ Backport from Core'
-    label: 'backport'
-  - title: '⚠️ Breaking changes'
-    label: 'breaking'
-  - title: '🚀 Features'
-    label: 'feature'
-  - title: '✨ Enhancement'
-    label: 'enhancement'
-  - title: '📘 Documentation'
-    label: 'documentation'
-  - title: '🐛 Bug Fixes'
-    label: 'bug'
 template: |
-  ## What's changed
+  See the [CHANGELOG.md]($REPOSITORY/blob/master/CHANGELOG.md) for more
+  information.
+
+  ## Changes
   $CHANGES
-  ## Contributors to this release
+
+  ## Contributors
   $CONTRIBUTORS
