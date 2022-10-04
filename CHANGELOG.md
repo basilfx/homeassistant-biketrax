@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.2
+Unreleased
+
+Highlights:
+* Updated: aiobiketrax v0.2.2a1 to address several API issues.
+
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-aiobiketrax/compare/v0.2.1...v0.2.2).
+
 ## v0.2.1
 Release 27 August 2022
 
