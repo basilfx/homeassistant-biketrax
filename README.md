@@ -53,7 +53,7 @@ logger:
   default: warning
   logs:
     aiobiketrax: debug
-    homeassistant.components.biketrax: debug
+    custom_components.biketrax: debug
 ```
 
 See the [README.md](https://github.com/basilfx/aiobiketrax/blob/master/README.md)
