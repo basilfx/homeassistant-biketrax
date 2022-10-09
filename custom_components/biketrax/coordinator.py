@@ -56,7 +56,12 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
 
     def start_background_task(self):
         """Start the websocket task."""
-        self.account.start(on_update=lambda: self.async_set_updated_data(None))
+
+        def _on_update():
+            _LOGGER.debug("Device data update received.")
+            self.async_set_updated_data(None)
+
+        self.account.start(on_update=_on_update)
 
     async def stop_background_task(self):
         """Stop the websocket task"""
