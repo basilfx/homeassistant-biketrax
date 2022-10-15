@@ -12,7 +12,7 @@ from httpx import HTTPError, TimeoutException
 
 from .const import CONF_READ_ONLY, DOMAIN
 
-SCAN_INTERVAL_DEVICE = timedelta(seconds=300)
+SCAN_INTERVAL_DEVICE = timedelta(minutes=15)
 SCAN_INTERVAL_TRIPS = timedelta(hours=1)
 SCAN_INTERVAL_SUBSCRIPTION = timedelta(hours=12)
 
