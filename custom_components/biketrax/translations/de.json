@@ -1,11 +1,13 @@
 {
     "config": {
         "abort": {
-            "already_configured": "Gerät wurde bereits konfiguriert"
+            "already_configured": "Ger\u00e4t wurde bereits konfiguriert"
         },
         "error": {
             "cannot_connect": "Verbindung fehlgeschlagen",
-            "invalid_auth": "Ung\u00fcltige Authentifizierung"
+            "invalid_auth": "Ung\u00fcltige Authentifizierung",
+            "no_device": "Kein Ger\u00e4t mit Ihrem Konto verkn\u00fcpft",
+            "unknown": "Unerwarteter Fehler"
         },
         "step": {
             "user": {

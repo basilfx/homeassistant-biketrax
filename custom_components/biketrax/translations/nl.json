@@ -5,7 +5,9 @@
         },
         "error": {
             "cannot_connect": "Kan geen verbinding maken",
-            "invalid_auth": "Ongeldige authenticatie"
+            "invalid_auth": "Ongeldige authenticatie",
+            "no_device": "Er is geen apparat aan het account gekoppeld",
+            "unknown": "Onbekende fout"
         },
         "step": {
             "user": {

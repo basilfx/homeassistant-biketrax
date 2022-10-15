@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from datetime import timedelta
 
-from aiobiketrax import Account
+from aiobiketrax import Account, exceptions
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
@@ -49,8 +49,10 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
 
             for device in self.account.devices:
                 await device.update_position()
-        except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
+        except exceptions.BikeTraxError as err:
+            raise UpdateFailed(
+                f"A BikeTrax error occurred while updating the devices: {err}"
+            ) from err
 
     def start_background_task(self):
         """Start the websocket task."""
@@ -83,8 +85,10 @@ class TripDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
         try:
             for device in self.account.devices:
                 await device.update_trips()
-        except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
+        except exceptions.BikeTraxError as err:
+            raise UpdateFailed(
+                f"A BikeTrax error occurred while updating the trips: {err}"
+            ) from err
 
 
 class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
@@ -109,5 +113,7 @@ class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
         try:
             for device in self.account.devices:
                 await device.update_subscription()
-        except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
+        except exceptions.BikeTraxError as err:
+            raise UpdateFailed(
+                f"A BikeTrax error occurred while updating the subscription data: {err}"
+            ) from err
