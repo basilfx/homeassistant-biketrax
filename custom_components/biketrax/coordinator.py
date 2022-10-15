@@ -12,7 +12,7 @@ from httpx import HTTPError, TimeoutException
 
 from .const import CONF_READ_ONLY, DOMAIN
 
-SCAN_INTERVAL_DEVICE = timedelta(seconds=300)
+SCAN_INTERVAL_DEVICE = timedelta(minutes=15)
 SCAN_INTERVAL_TRIPS = timedelta(hours=1)
 SCAN_INTERVAL_SUBSCRIPTION = timedelta(hours=12)
 
@@ -45,9 +45,20 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
         _LOGGER.debug("Device data coordinator updating.")
 
         try:
+            last_updated = {
+                device.id: device.last_updated for device in self.account.devices
+            }
+
             await self.account.update_devices()
 
             for device in self.account.devices:
+                if device.last_updated == last_updated.get(device.id):
+                    _LOGGER.debug(
+                        "Not updating position for device %s because it has not changed.",
+                        device.id,
+                    )
+                    continue
+
                 await device.update_position()
         except exceptions.BikeTraxError as err:
             raise UpdateFailed(
