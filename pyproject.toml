@@ -20,7 +20,7 @@ authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-homeassistant = "^2022.9.0"
+homeassistant = "^2022.10.0"
 flake8 = "^5.0.4"
 flake8-mypy = "^17.8.0"
 aiobiketrax = {version = "^0.2.2a1", allow-prereleases = true}
