@@ -81,6 +81,9 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
         self._is_home = False
         await self.device.set_guarded(False)
 
+    # Both home and away are both added instead of a single mode because the UI doesn't reflect chosen mode correctly.
+    # See https://github.com/nielsfaber/alarmo/issues/384 for some details.
+    # TODO: fix if UI bug is corrected.
     async def async_alarm_arm_home(self, code=None):
         """Send arm away command."""
         self._is_home = True
