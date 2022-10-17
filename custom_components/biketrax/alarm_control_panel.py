@@ -1,4 +1,4 @@
-"""Support for Overkiz Alarms."""
+"""Device alarm control panel for BikeTrax devices."""
 from __future__ import annotations
 
 from aiobiketrax import Device
