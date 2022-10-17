@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from datetime import timedelta
 
-from aiobiketrax import Account
+from aiobiketrax import Account, exceptions
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
@@ -12,7 +12,7 @@ from httpx import HTTPError, TimeoutException
 
 from .const import CONF_READ_ONLY, DOMAIN
 
-SCAN_INTERVAL_DEVICE = timedelta(seconds=300)
+SCAN_INTERVAL_DEVICE = timedelta(minutes=15)
 SCAN_INTERVAL_TRIPS = timedelta(hours=1)
 SCAN_INTERVAL_SUBSCRIPTION = timedelta(hours=12)
 
@@ -45,16 +45,34 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
         _LOGGER.debug("Device data coordinator updating.")
 
         try:
+            last_updated = {
+                device.id: device.last_updated for device in self.account.devices
+            }
+
             await self.account.update_devices()
 
             for device in self.account.devices:
+                if device.last_updated == last_updated.get(device.id):
+                    _LOGGER.debug(
+                        "Not updating position for device %s because it has not changed.",
+                        device.id,
+                    )
+                    continue
+
                 await device.update_position()
-        except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
+        except exceptions.BikeTraxError as err:
+            raise UpdateFailed(
+                f"A BikeTrax error occurred while updating the devices: {err}"
+            ) from err
 
     def start_background_task(self):
         """Start the websocket task."""
-        self.account.start(on_update=lambda: self.async_set_updated_data(None))
+
+        def _on_update():
+            _LOGGER.debug("Device data update received.")
+            self.async_set_updated_data(None)
+
+        self.account.start(on_update=_on_update)
 
     async def stop_background_task(self):
         """Stop the websocket task"""
@@ -83,8 +101,10 @@ class TripDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
         try:
             for device in self.account.devices:
                 await device.update_trips()
-        except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
+        except exceptions.BikeTraxError as err:
+            raise UpdateFailed(
+                f"A BikeTrax error occurred while updating the trips: {err}"
+            ) from err
 
 
 class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
@@ -109,5 +129,7 @@ class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
         try:
             for device in self.account.devices:
                 await device.update_subscription()
-        except (HTTPError, TimeoutException) as err:
-            raise UpdateFailed(f"Error communicating with BikeTrax API: {err}") from err
+        except exceptions.BikeTraxError as err:
+            raise UpdateFailed(
+                f"A BikeTrax error occurred while updating the subscription data: {err}"
+            ) from err

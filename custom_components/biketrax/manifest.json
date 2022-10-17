@@ -8,8 +8,8 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://www.github.com/basilfx/homeassistant-biketrax/issues",
   "name": "PowUnity BikeTrax",
-  "requirements": ["aiobiketrax==0.2.1"],
+  "requirements": ["aiobiketrax==0.3.0"],
   "ssdp": [],
-  "version": "0.2.1",
+  "version": "0.3.0",
   "zeroconf": []
 }

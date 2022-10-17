@@ -14,7 +14,6 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
-    CONF_UNIT_SYSTEM_IMPERIAL,
     LENGTH_KILOMETERS,
     LENGTH_MILES,
     PERCENTAGE,
@@ -151,10 +150,10 @@ class BikeTraxSensor(BikeTraxBaseEntity, SensorEntity):
         self._attr_name = f"{device.name} {description.name}"
         self._attr_unique_id = f"{device.id}-{description.key}"
 
-        if unit_system.name == CONF_UNIT_SYSTEM_IMPERIAL:
-            self._attr_native_unit_of_measurement = description.unit_imperial
-        else:
+        if unit_system.is_metric:
             self._attr_native_unit_of_measurement = description.unit_metric
+        else:
+            self._attr_native_unit_of_measurement = description.unit_imperial
 
     @property
     def native_value(self) -> StateType:

@@ -44,6 +44,21 @@ type.
 This custom component builds on top of
 [aiobiketrax](https://github.com/basilfx/aiobiketrax).
 
+### Debug logging
+Additional debug logging can be enabled via the [Logger](https://www.home-assistant.io/integrations/logger/)
+component. See the configuration below to enable debug logging for this integration.
+
+```yaml
+logger:
+  default: warning
+  logs:
+    aiobiketrax: debug
+    custom_components.biketrax: debug
+```
+
+See the [README.md](https://github.com/basilfx/aiobiketrax/blob/master/README.md)
+of `aiobiketrax` for more information.
+
 ### Development version
 If you ever need to use a newer version of `aiobiketrax` with this integration,
 you can edit `custom_components/biketrax/manifest.json` and adapt the

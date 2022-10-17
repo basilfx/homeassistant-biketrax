@@ -5,7 +5,7 @@ import logging
 from typing import Any
 
 import voluptuous as vol
-from aiobiketrax import Account
+from aiobiketrax import Account, exceptions
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.data_entry_flow import FlowResult
@@ -37,9 +37,22 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     )
 
     try:
-        await account.update_devices()
-    except:
+        try:
+            await account.update_devices()
+        except Exception as e:  # pylint: disable=broad-except
+            _LOGGER.debug(
+                "Exception while validating input for '%s'.",
+                data["username"],
+                exc_info=e,
+            )
+            raise
+    except exceptions.ConnectionError:
+        raise CannotConnect
+    except exceptions.AuthenticationError:
         raise InvalidAuth
+
+    if not account.devices:
+        raise NoDevice
 
     return {"title": f"BikeTrax {data['username']}"}
 
@@ -66,6 +79,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             errors["base"] = "cannot_connect"
         except InvalidAuth:
             errors["base"] = "invalid_auth"
+        except NoDevice:
+            errors["base"] = "no_device"
         except Exception:  # pylint: disable=broad-except
             _LOGGER.exception("Unexpected exception")
             errors["base"] = "unknown"
@@ -131,3 +146,7 @@ class CannotConnect(HomeAssistantError):
 
 class InvalidAuth(HomeAssistantError):
     """Error to indicate there is invalid auth."""
+
+
+class NoDevice(HomeAssistantError):
+    """Error to indicate there are no devices."""
