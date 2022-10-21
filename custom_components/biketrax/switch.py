@@ -39,14 +39,6 @@ class BikeTraxBinarySwitchEntityDescription(
 SWITCH_TYPES: tuple[BikeTraxBinarySwitchEntityDescription, ...] = (
     BikeTraxBinarySwitchEntityDescription(
         coordinator=DATA_DEVICE,
-        key="is_guarded",
-        name="Alarm",
-        icon="mdi:alarm-light",
-        get_fn=lambda d: d.is_guarded,
-        set_fn=lambda d, v: d.set_guarded(v),
-    ),
-    BikeTraxBinarySwitchEntityDescription(
-        coordinator=DATA_DEVICE,
         key="is_stolen",
         name="Stolen",
         icon="mdi:account-lock",
