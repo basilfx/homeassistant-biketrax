@@ -17,12 +17,8 @@ from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import CONF_READ_ONLY, DATA_DEVICE, DATA_SUBSCRIPTION, DATA_TRIP, DOMAIN
+from .const import DATA_DEVICE, DATA_SUBSCRIPTION, DATA_TRIP, DOMAIN
 from .coordinator import BikeTraxDataUpdateCoordinator
-
-DEFAULT_OPTIONS = {
-    CONF_READ_ONLY: False,
-}
 
 PLATFORMS = [
     Platform.ALARM_CONTROL_PANEL,
@@ -33,24 +29,8 @@ PLATFORMS = [
 ]
 
 
-@callback
-def _async_migrate_options_from_data_if_missing(
-    hass: HomeAssistant, entry: ConfigEntry
-) -> None:
-    data = dict(entry.data)
-    options = dict(entry.options)
-
-    if CONF_READ_ONLY in data or list(options) != list(DEFAULT_OPTIONS):
-        options = dict(DEFAULT_OPTIONS, **options)
-        options[CONF_READ_ONLY] = data.pop(CONF_READ_ONLY, False)
-
-        hass.config_entries.async_update_entry(entry, data=data, options=options)
-
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up BikeTrax from a config entry."""
-
-    _async_migrate_options_from_data_if_missing(hass, entry)
 
     # Setup an BikeTrax account instance.
     account = Account(
