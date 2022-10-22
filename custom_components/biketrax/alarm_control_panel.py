@@ -44,6 +44,10 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
     """Representation of a BikeTrax Alarm."""
 
     _attr_code_arm_required = False
+
+    # Both 'arm home' and 'arm away' are added, because the UI does not reflect
+    # the supported features correctly.
+    # See https://github.com/nielsfaber/alarmo/issues/384 for some details.
     _attr_supported_features = (
         AlarmControlPanelEntityFeature.ARM_HOME
         | AlarmControlPanelEntityFeature.ARM_AWAY
@@ -76,24 +80,25 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
             else STATE_ALARM_DISARMED
         )
 
-    async def async_alarm_disarm(self, code=None):
+    async def async_alarm_disarm(self, code: str | None = None) -> None:
         """Send disarm command."""
-        self._is_home = False
-        await self.device.set_guarded(False)
+        if not self.coordinator.read_only:
+            self._is_home = False
+            await self.device.set_guarded(False)
 
-    # Both home and away are both added instead of a single mode because the UI doesn't reflect chosen mode correctly.
-    # See https://github.com/nielsfaber/alarmo/issues/384 for some details.
-    # TODO: fix if UI bug is corrected.
-    async def async_alarm_arm_home(self, code=None):
+    async def async_alarm_arm_home(self, code: str | None = None) -> None:
         """Send arm away command."""
-        self._is_home = True
-        await self.device.set_guarded(True)
+        if not self.coordinator.read_only:
+            self._is_home = True
+            await self.device.set_guarded(True)
 
-    async def async_alarm_arm_away(self, code=None):
+    async def async_alarm_arm_away(self, code: str | None = None) -> None:
         """Send arm away command."""
-        self._is_home = False
-        await self.device.set_guarded(True)
+        if not self.coordinator.read_only:
+            self._is_home = False
+            await self.device.set_guarded(True)
 
-    async def async_alarm_trigger(self, code=None):
+    async def async_alarm_trigger(self, code: str | None = None) -> None:
         """Send alarm trigger command."""
-        await self.device.set_stolen(True)
+        if not self.coordinator.read_only:
+            await self.device.set_stolen(True)
