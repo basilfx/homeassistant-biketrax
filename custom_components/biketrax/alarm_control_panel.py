@@ -80,25 +80,25 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
             else STATE_ALARM_DISARMED
         )
 
-    async def async_alarm_disarm(self, code=None):
+    async def async_alarm_disarm(self, code: str | None = None) -> None:
         """Send disarm command."""
         if not self.coordinator.read_only:
             self._is_home = False
             await self.device.set_guarded(False)
 
-    async def async_alarm_arm_home(self, code=None):
+    async def async_alarm_arm_home(self, code: str | None = None) -> None:
         """Send arm away command."""
         if not self.coordinator.read_only:
             self._is_home = True
             await self.device.set_guarded(True)
 
-    async def async_alarm_arm_away(self, code=None):
+    async def async_alarm_arm_away(self, code: str | None = None) -> None:
         """Send arm away command."""
         if not self.coordinator.read_only:
             self._is_home = False
             await self.device.set_guarded(True)
 
-    async def async_alarm_trigger(self, code=None):
+    async def async_alarm_trigger(self, code: str | None = None) -> None:
         """Send alarm trigger command."""
         if not self.coordinator.read_only:
             await self.device.set_stolen(True)
