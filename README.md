@@ -34,11 +34,22 @@ You can also click the button below to get started.
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=biketrax)
 
 ## Known issues
-When read-only mode is enabled, the switches do not reflect this mode properly.
-If you try to toggle a switch, it will eventually restore to its actual state.
+
+### Read-only mode
+When read-only mode is enabled, the switches and alarm do not reflect this mode
+properly. For example, if you try to toggle device tracking, it will eventually
+restore to its previous state.
 
 I do not really know how to handle this properly, without changing the entity
 type.
+
+### Alarm control panel
+The current alarm control panel component in Home Assistant does not reflect
+the supported features properly. In addition, 'arm home' and 'arm away' have an
+odd meaning for a device alarm. Because of this 'bug', both modes for arming
+the alarm are implemented.
+
+See https://github.com/nielsfaber/alarmo/issues/384 for more information.
 
 ## References
 This custom component builds on top of
