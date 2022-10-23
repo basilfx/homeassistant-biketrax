@@ -72,7 +72,7 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
         """Return the state of the device."""
         return (
             STATE_ALARM_TRIGGERED
-            if self.device.is_alarm_triggered or self.device.is_stolen
+            if self.device.is_guarded and self.device.is_alarm_triggered
             else STATE_ALARM_ARMED_HOME
             if self.device.is_guarded and self._is_home
             else STATE_ALARM_ARMED_AWAY
@@ -101,4 +101,6 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
     async def async_alarm_trigger(self, code: str | None = None) -> None:
         """Send alarm trigger command."""
         if not self.coordinator.read_only:
-            await self.device.set_stolen(True)
+            # There is not really a possibility to trigger an alarm, so at
+            # least enable it.
+            await self.device.set_guarded(True)
