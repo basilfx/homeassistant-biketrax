@@ -36,6 +36,12 @@ class BikeTraxBinarySensorEntityDescription(
 SENSOR_TYPES: tuple[BikeTraxBinarySensorEntityDescription, ...] = (
     BikeTraxBinarySensorEntityDescription(
         coordinator=DATA_DEVICE,
+        key="is_guarded",
+        name="Alarm enabled",
+        icon="mdi:shield-lock",
+    ),
+    BikeTraxBinarySensorEntityDescription(
+        coordinator=DATA_DEVICE,
         key="is_alarm_triggered",
         name="Alarm triggered",
         icon="mdi:alarm-light",
@@ -43,7 +49,7 @@ SENSOR_TYPES: tuple[BikeTraxBinarySensorEntityDescription, ...] = (
     BikeTraxBinarySensorEntityDescription(
         coordinator=DATA_DEVICE,
         key="is_auto_guarded",
-        name="Auto guarded",
+        name="Auto alarm enabled",
         icon="mdi:account-lock",
     ),
 )
