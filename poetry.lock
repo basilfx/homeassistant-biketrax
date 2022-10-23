@@ -1,6 +1,6 @@
 [[package]]
 name = "aiobiketrax"
-version = "0.3.0"
+version = "0.4.0"
 description = "Python library for interacting with the PowUnity BikeTrax GPS tracker."
 category = "main"
 optional = false
@@ -864,12 +864,12 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "fbdc579fa039b90560934f8427203b384cd6fe9176934f07ac05b238387455c8"
+content-hash = "167d34d4b4f6cb4dce0ee136d21d10d8ee935063c9937216dd4d4e2b80099dfa"
 
 [metadata.files]
 aiobiketrax = [
-    {file = "aiobiketrax-0.3.0-py3-none-any.whl", hash = "sha256:c6e562450d9a47b11ff24b2136e1f836dbdcfe3ffedcdfa6423439f74ee30615"},
-    {file = "aiobiketrax-0.3.0.tar.gz", hash = "sha256:a7fb94efd0e609555dbb072377e2a20e09c43f9d26a53ba1ab53811e86e25c25"},
+    {file = "aiobiketrax-0.4.0-py3-none-any.whl", hash = "sha256:4024522d8fa8290079fb2dd90f2c1159c10cd3e90108bf2735ab967c06e45e61"},
+    {file = "aiobiketrax-0.4.0.tar.gz", hash = "sha256:73e0722bd1067a71c08304e14c64da6f66ee945e7f54e70c7927a37b44b0633b"},
 ]
 aiohttp = [
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:1ed0b6477896559f17b9eaeb6d38e07f7f9ffe40b9f0f9627ae8b9926ae260a8"},
