@@ -63,7 +63,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         coordinator=DATA_DEVICE,
         icon="mdi:speedometer",
         imperial_conversion=lambda val: distance_convert(
-            val, LENGTH_MILES, LENGTH_KILOMETERS
+            val, LENGTH_KILOMETERS, LENGTH_MILES
         ),
         key="total_distance",
         name="Total distance",
@@ -74,7 +74,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         coordinator=DATA_DEVICE,
         icon="mdi:speedometer",
         imperial_conversion=lambda val: speed_convert(
-            val, SPEED_MILES_PER_HOUR, SPEED_KILOMETERS_PER_HOUR
+            val, SPEED_KILOMETERS_PER_HOUR, SPEED_MILES_PER_HOUR
         ),
         key="speed",
         name="Current speed",
