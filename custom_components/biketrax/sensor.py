@@ -14,7 +14,9 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
+    LENGTH_FEET,
     LENGTH_KILOMETERS,
+    LENGTH_METERS,
     LENGTH_MILES,
     PERCENTAGE,
     SPEED_KILOMETERS_PER_HOUR,
@@ -100,6 +102,23 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         icon="mdi:clock",
         key="last_updated",
         name="Last updated",
+    ),
+    BikeTraxSensorEntityDescription(
+        coordinator=DATA_DEVICE,
+        icon="mdi:border-radius",
+        key="guard_type",
+        name="Auto alarm type",
+    ),
+    BikeTraxSensorEntityDescription(
+        coordinator=DATA_DEVICE,
+        icon="mdi:map-marker-distance",
+        imperial_conversion=lambda val: distance_convert(
+            val, LENGTH_METERS, LENGTH_FEET
+        ),
+        key="geofence_radius",
+        name="Auto alarm geofence radius",
+        unit_imperial=LENGTH_FEET,
+        unit_metric=LENGTH_METERS,
     ),
 )
 
