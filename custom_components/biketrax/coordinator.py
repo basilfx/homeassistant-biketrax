@@ -8,7 +8,6 @@ from aiobiketrax import Account, exceptions
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-from httpx import HTTPError, TimeoutException
 
 from .const import CONF_READ_ONLY, DOMAIN
 
@@ -21,6 +20,16 @@ _LOGGER = logging.getLogger(__name__)
 
 class BikeTraxDataUpdateCoordinator(DataUpdateCoordinator):
     account: Account
+    read_only: bool
+
+    def __init__(
+        self, hass: HomeAssistant, account: Account, entry: ConfigEntry, **kwargs
+    ) -> None:
+        """Initialize account-wide BikeTrax data update coordinator."""
+        self.account = account
+        self.read_only = entry.options.get(CONF_READ_ONLY, False)
+
+        super().__init__(hass, _LOGGER, **kwargs)
 
 
 class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
@@ -29,13 +38,11 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
     def __init__(
         self, hass: HomeAssistant, account: Account, entry: ConfigEntry
     ) -> None:
-        """Initialize account-wide BikeTrax data update coordinator."""
-        self.account = account
-        self.read_only = entry.options[CONF_READ_ONLY]
-
+        """Initialize account-wide BikeTrax device update coordinator."""
         super().__init__(
             hass,
-            _LOGGER,
+            account,
+            entry,
             name=f"{DOMAIN}-{entry.data['username']}-device",
             update_interval=SCAN_INTERVAL_DEVICE,
         )
@@ -83,13 +90,11 @@ class TripDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
     def __init__(
         self, hass: HomeAssistant, account: Account, entry: ConfigEntry
     ) -> None:
-        """Initialize account-wide BikeTrax data update coordinator."""
-        self.account = account
-        self.read_only = entry.options[CONF_READ_ONLY]
-
+        """Initialize account-wide BikeTrax trip update coordinator."""
         super().__init__(
             hass,
-            _LOGGER,
+            account,
+            entry,
             name=f"{DOMAIN}-{entry.data['username']}-trip",
             update_interval=SCAN_INTERVAL_TRIPS,
         )
@@ -111,13 +116,11 @@ class SubscriptionDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
     def __init__(
         self, hass: HomeAssistant, account: Account, entry: ConfigEntry
     ) -> None:
-        """Initialize account-wide BikeTrax data update coordinator."""
-        self.account = account
-        self.read_only = entry.options[CONF_READ_ONLY]
-
+        """Initialize account-wide BikeTrax subscription update coordinator."""
         super().__init__(
             hass,
-            _LOGGER,
+            account,
+            entry,
             name=f"{DOMAIN}-{entry.data['username']}-subscription",
             update_interval=SCAN_INTERVAL_SUBSCRIPTION,
         )
