@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.0
+Released 30 October 2022
+
+Highlights:
+* Updated: aiobiketrax v0.4.0 for exposing additional data.
+* Improved: migrate alarm switch to an alarm control panel (breaking change).
+* Fixed: read-only mode not persisted.
+* Fixed: unit conversion for imperial units.
+
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-aiobiketrax/compare/v0.3.0...v0.4.0).
+
 ## v0.3.0
 Released 16 October 2022
 
