@@ -1,7 +1,6 @@
 """Support for reading device status from BikeTrax."""
 from __future__ import annotations
 
-from collections.abc import Callable
 from dataclasses import dataclass
 from typing import cast
 
@@ -14,20 +13,15 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
-    LENGTH_FEET,
     LENGTH_KILOMETERS,
     LENGTH_METERS,
-    LENGTH_MILES,
     PERCENTAGE,
     SPEED_KILOMETERS_PER_HOUR,
-    SPEED_MILES_PER_HOUR,
 )
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import StateType
-from homeassistant.util.distance import convert as distance_convert
-from homeassistant.util.speed import convert as speed_convert
-from homeassistant.util.unit_system import UnitSystem
 
 from . import BikeTraxBaseEntity
 from .const import DATA_DEVICE, DATA_SUBSCRIPTION, DOMAIN
@@ -47,41 +41,31 @@ class BikeTraxSensorEntityDescription(
 ):
     """Describes BikeTrax sensor entity."""
 
-    imperial_conversion: Callable[[float], float] | float | None = None
-    unit_metric: str | None = None
-    unit_imperial: str | None = None
-
 
 SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
         device_class=SensorDeviceClass.BATTERY,
+        entity_category=EntityCategory.DIAGNOSTIC,
         key="battery_level",
         name="Battery level",
-        unit_imperial=PERCENTAGE,
-        unit_metric=PERCENTAGE,
+        native_unit_of_measurement=PERCENTAGE,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
+        device_class=SensorDeviceClass.DISTANCE,
         icon="mdi:speedometer",
-        imperial_conversion=lambda val: distance_convert(
-            val, LENGTH_KILOMETERS, LENGTH_MILES
-        ),
         key="total_distance",
         name="Total distance",
-        unit_imperial=LENGTH_MILES,
-        unit_metric=LENGTH_KILOMETERS,
+        native_unit_of_measurement=LENGTH_KILOMETERS,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
+        device_class=SensorDeviceClass.SPEED,
         icon="mdi:speedometer",
-        imperial_conversion=lambda val: speed_convert(
-            val, SPEED_KILOMETERS_PER_HOUR, SPEED_MILES_PER_HOUR
-        ),
         key="speed",
         name="Current speed",
-        unit_imperial=SPEED_MILES_PER_HOUR,
-        unit_metric=SPEED_KILOMETERS_PER_HOUR,
+        native_unit_of_measurement=SPEED_KILOMETERS_PER_HOUR,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_SUBSCRIPTION,
@@ -111,14 +95,11 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
+        device_class=SensorDeviceClass.DISTANCE,
         icon="mdi:map-marker-distance",
-        imperial_conversion=lambda val: distance_convert(
-            val, LENGTH_METERS, LENGTH_FEET
-        ),
         key="geofence_radius",
         name="Auto alarm geofence radius",
-        unit_imperial=LENGTH_FEET,
-        unit_metric=LENGTH_METERS,
+        native_unit_of_measurement=LENGTH_METERS,
     ),
 )
 
@@ -135,12 +116,7 @@ async def async_setup_entry(
     ]
 
     entities = [
-        BikeTraxSensor(
-            coordinators[description.coordinator],
-            device,
-            description,
-            hass.config.units,
-        )
+        BikeTraxSensor(coordinators[description.coordinator], device, description)
         for description in SENSOR_TYPES
         for device in coordinators[description.coordinator].account.devices
     ]
@@ -158,30 +134,19 @@ class BikeTraxSensor(BikeTraxBaseEntity, SensorEntity):
         coordinator: BikeTraxDataUpdateCoordinator,
         device: Device,
         description: BikeTraxSensorEntityDescription,
-        unit_system: UnitSystem,
     ) -> None:
         """Initialize BikeTrax device sensor."""
         super().__init__(coordinator, device)
 
-        self.entity_id = f"{SENSOR_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
         self.entity_description = description
+        self.entity_id = f"{SENSOR_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
 
+        self._attr_device_class = description.device_class
+        self._attr_entity_category = description.entity_category
         self._attr_name = f"{device.name} {description.name}"
+        self._attr_native_unit_of_measurement = description.native_unit_of_measurement
         self._attr_unique_id = f"{device.id}-{description.key}"
-
-        if unit_system.is_metric:
-            self._attr_native_unit_of_measurement = description.unit_metric
-        else:
-            self._attr_native_unit_of_measurement = description.unit_imperial
 
     @property
     def native_value(self) -> StateType:
-        state = cast(StateType, getattr(self.device, self.entity_description.key))
-
-        if (
-            self.entity_description.imperial_conversion
-            and not self.hass.config.units.is_metric
-        ):
-            return self.entity_description.imperial_conversion(state)
-
-        return state
+        return cast(StateType, getattr(self.device, self.entity_description.key))
