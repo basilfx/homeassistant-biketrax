@@ -34,7 +34,8 @@ async def async_setup_entry(
 
         if not device.is_tracking_enabled:
             _LOGGER.info(
-                "Tracking is (currently) disabled for device %s (%s), defaulting to unknown",
+                "Tracking is (currently) disabled for device %s (%s), defaulting to "
+                "unknown",
                 device.id,
                 device.name,
             )

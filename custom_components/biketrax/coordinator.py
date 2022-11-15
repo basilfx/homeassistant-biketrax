@@ -61,7 +61,8 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
             for device in self.account.devices:
                 if device.last_updated == last_updated.get(device.id):
                     _LOGGER.debug(
-                        "Not updating position for device %s because it has not changed.",
+                        "Not updating position for device %s because it has not "
+                        "changed.",
                         device.id,
                     )
                     continue
