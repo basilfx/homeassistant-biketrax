@@ -12,13 +12,18 @@ from homeassistant.const import (
     EVENT_HOMEASSISTANT_STOP,
     Platform,
 )
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DATA_DEVICE, DATA_SUBSCRIPTION, DATA_TRIP, DOMAIN
-from .coordinator import BikeTraxDataUpdateCoordinator
+from .coordinator import (
+    BikeTraxDataUpdateCoordinator,
+    DeviceDataUpdateCoordinator,
+    SubscriptionDataUpdateCoordinator,
+    TripDataUpdateCoordinator,
+)
 
 PLATFORMS = [
     Platform.ALARM_CONTROL_PANEL,
@@ -43,17 +48,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # coordinators: one for the (push-capable) devices, one for the trips and
     # one for the subscription information. The last two will be updates less
     # frequently.
-    device_coordinator = coordinator.DeviceDataUpdateCoordinator(
+    device_coordinator = DeviceDataUpdateCoordinator(
         hass,
         account,
         entry,
     )
-    trip_coordinator = coordinator.TripDataUpdateCoordinator(
+    trip_coordinator = TripDataUpdateCoordinator(
         hass,
         account,
         entry,
     )
-    subscription_coordinator = coordinator.SubscriptionDataUpdateCoordinator(
+    subscription_coordinator = SubscriptionDataUpdateCoordinator(
         hass,
         account,
         entry,
