@@ -5,7 +5,7 @@ Custom component for the PowUnity BikeTrax integration for Home Assistant.
 This custom components adds support for the
 [PowUnity BikeTrax](https://powunity.com/) GPS tracker.
 
-[<img src="docs/images/screenshot.png" width="768" alt="Overview screenshot.">](docs/images/screenshot.png)
+[<img src="docs/images/screenshot.png" alt="Overview screenshot.">](docs/images/screenshot.png)
 
 ## Features
 * Multi-device support
