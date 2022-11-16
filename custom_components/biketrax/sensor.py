@@ -10,6 +10,7 @@ from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntity,
     SensorEntityDescription,
+    SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
@@ -50,6 +51,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         key="battery_level",
         name="Battery level",
         native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
@@ -58,6 +60,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         key="total_distance",
         name="Total distance",
         native_unit_of_measurement=LENGTH_KILOMETERS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
@@ -66,6 +69,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         key="speed",
         name="Current speed",
         native_unit_of_measurement=SPEED_KILOMETERS_PER_HOUR,
+        state_class=SensorStateClass.MEASUREMENT,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_SUBSCRIPTION,
