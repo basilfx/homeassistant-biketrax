@@ -1,4 +1,4 @@
-"""Reads device status from BikeTrax."""
+"""Switch entities for BikeTrax devices."""
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -90,8 +90,8 @@ class BikeTraxBinarySensor(BikeTraxBaseEntity, SwitchEntity):
         """Initialize switch."""
         super().__init__(coordinator, device)
 
-        self.entity_id = f"{SWITCH_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
         self.entity_description = description
+        self.entity_id = f"{SWITCH_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
 
         self._attr_name = f"{device.name} {description.name}"
         self._attr_unique_id = f"{device.id}-{description.key}"
