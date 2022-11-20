@@ -2,6 +2,7 @@ name-template: 'v$NEXT_PATCH_VERSION'
 tag-template: 'v$NEXT_PATCH_VERSION'
 exclude-contributors:
   - dependabot
+  - dependabot[bot]
 template: |
   See the [CHANGELOG.md](https://github.com/$OWNER/$REPOSITORY/blob/master/CHANGELOG.md) for more information.
 

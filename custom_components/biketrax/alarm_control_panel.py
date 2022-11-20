@@ -1,4 +1,4 @@
-"""Device alarm control panel for BikeTrax devices."""
+"""Alarm control panel for BikeTrax devices."""
 from __future__ import annotations
 
 from aiobiketrax import Device
@@ -63,8 +63,10 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
         super().__init__(coordinator, device)
 
         self.entity_id = f"{ALARM_DOMAIN}.{DOMAIN}_alarm_{device.id}"
+
         self._attr_name = f"{device.name} Alarm"
         self._attr_unique_id = f"{device.id}-alarm"
+
         self._is_home = False
 
     @property

@@ -1,4 +1,4 @@
-"""Support for reading device status from BikeTrax."""
+"""Sensor entities for BikeTrax devices."""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -145,10 +145,7 @@ class BikeTraxSensor(BikeTraxBaseEntity, SensorEntity):
         self.entity_description = description
         self.entity_id = f"{SENSOR_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
 
-        self._attr_device_class = description.device_class
-        self._attr_entity_category = description.entity_category
         self._attr_name = f"{device.name} {description.name}"
-        self._attr_native_unit_of_measurement = description.native_unit_of_measurement
         self._attr_unique_id = f"{device.id}-{description.key}"
 
     @property

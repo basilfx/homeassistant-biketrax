@@ -1,4 +1,4 @@
-"""Reads device status from BikeTrax."""
+"""Binary sensor entities for BikeTrax devices."""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -89,10 +89,10 @@ class BikeTraxBinarySensor(BikeTraxBaseEntity, BinarySensorEntity):
         """Initialize sensor."""
         super().__init__(coordinator, device)
 
+        self.entity_description = description
         self.entity_id = (
             f"{BINARY_SENSOR_DOMAIN}.{DOMAIN}_{description.key}_{device.id}"
         )
-        self.entity_description = description
 
         self._attr_name = f"{device.name} {description.name}"
         self._attr_unique_id = f"{device.id}-{description.key}"
