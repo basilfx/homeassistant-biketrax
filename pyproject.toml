@@ -21,7 +21,7 @@ authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 homeassistant = "^2022.12.1"
-aiobiketrax = {version = "^0.4.0", allow-prereleases = true}
+aiobiketrax = "^0.5.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.12.0"
