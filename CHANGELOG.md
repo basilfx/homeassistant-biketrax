@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.5.0
+Released 10 December 2022
+
+Highlights:
+* Added: sensor states for statistics support.
+* Added: proper support for native units that can be configured via HASS.
+* Fixed: upgrade to aiobiketrax v0.5.0 for solving WebSocket connection issues.
+
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-aiobiketrax/compare/v0.4.0...v0.5.0).
+
 ## v0.4.0
 Released 30 October 2022
 
