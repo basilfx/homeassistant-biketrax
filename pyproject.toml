@@ -20,7 +20,7 @@ authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-homeassistant = "^2022.12.1"
+homeassistant = "^2023.1.7"
 aiobiketrax = "^0.5.0"
 
 [tool.poetry.dev-dependencies]
