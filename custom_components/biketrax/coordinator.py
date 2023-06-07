@@ -4,6 +4,7 @@ from __future__ import annotations
 import logging
 from datetime import timedelta
 
+import homeassistant.util.dt as dt_util
 from aiobiketrax import Account, exceptions
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -59,6 +60,14 @@ class DeviceDataUpdateCoordinator(BikeTraxDataUpdateCoordinator):
             await self.account.update_devices()
 
             for device in self.account.devices:
+                if device.subscription_until:
+                    if device.subscription_until < dt_util.now():
+                        _LOGGER.warning(
+                            "Device %s seems to have an expired subscription. "
+                            "No device updates are expected.",
+                            device.id,
+                        )
+
                 if device.last_updated == last_updated.get(device.id):
                     _LOGGER.debug(
                         "Not updating position for device %s because it has not "
