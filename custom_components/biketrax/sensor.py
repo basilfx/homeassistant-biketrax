@@ -42,6 +42,8 @@ class BikeTraxSensorEntityDescription(
 ):
     """Describes BikeTrax sensor entity."""
 
+    attribute: str | None = None
+
 
 SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
     BikeTraxSensorEntityDescription(
@@ -49,6 +51,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.BATTERY,
         entity_category=EntityCategory.DIAGNOSTIC,
         key="battery_level",
+        attribute="estimated_battery_level",
         name="Battery level",
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
@@ -150,4 +153,10 @@ class BikeTraxSensor(BikeTraxBaseEntity, SensorEntity):
 
     @property
     def native_value(self) -> StateType:
-        return cast(StateType, getattr(self.device, self.entity_description.key))
+        return cast(
+            StateType,
+            getattr(
+                self.device,
+                self.entity_description.attribute or self.entity_description.key,
+            ),
+        )
