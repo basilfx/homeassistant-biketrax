@@ -108,6 +108,13 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         name="Auto alarm geofence radius",
         native_unit_of_measurement=LENGTH_METERS,
     ),
+    BikeTraxSensorEntityDescription(
+        coordinator=DATA_DEVICE,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:state-machine",
+        key="firmware_version",
+        name="Firmware version",
+    ),
 )
 
 
