@@ -20,8 +20,8 @@ authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-homeassistant = "^2023.1.0"
-aiobiketrax = "^0.5.0"
+homeassistant = "~2023.5.0"
+aiobiketrax = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"
