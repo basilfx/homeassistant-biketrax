@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.0
+Released 12 June 2023
+
+Highlights:
+* Fixed: compatibility with Home Assistant 2023.5 and later.
+* Added: additional entities.
+* Improved: use estimated battery level (similar to official app).
+* Improved: log warning when subscription has ended.
+* Updated: upgrade to aiobiketrax v1.0.0.
+
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-aiobiketrax/compare/v0.5.0...v1.0.0).
+
 ## v0.5.0
 Released 10 December 2022
 
