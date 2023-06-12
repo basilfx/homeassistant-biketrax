@@ -52,6 +52,12 @@ SENSOR_TYPES: tuple[BikeTraxBinarySensorEntityDescription, ...] = (
         name="Auto alarm enabled",
         icon="mdi:account-lock",
     ),
+    BikeTraxBinarySensorEntityDescription(
+        coordinator=DATA_DEVICE,
+        key="is_charging",
+        name="Charging",
+        icon="mdi:battery-charging",
+    ),
 )
 
 
