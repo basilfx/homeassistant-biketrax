@@ -8,6 +8,9 @@
   "homekit": {},
   "iot_class": "cloud_polling",
   "issue_tracker": "https://www.github.com/basilfx/homeassistant-biketrax/issues",
+  "loggers": [
+    "aiobiketrax"
+  ],
   "requirements": ["aiobiketrax==1.1.0"],
   "ssdp": [],
   "version": "1.0.0",

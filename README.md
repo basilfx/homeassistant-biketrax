@@ -33,6 +33,13 @@ You can also click the button below to get started.
 
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=biketrax)
 
+### Debug logging
+Additional logging can be enabled from the Home Assistant integrations page.
+Simply enable debug logging to see additional logging of this integration.
+
+If you ever need to share your logs, be sure to remove sensitive data such as
+email addresses, identifiers and serial numbers.
+
 ## Known issues
 
 ### Read-only mode
@@ -63,21 +70,6 @@ available with an additional subscription.
 ## References
 This custom component builds on top of
 [aiobiketrax](https://github.com/basilfx/aiobiketrax).
-
-### Debug logging
-Additional debug logging can be enabled via the [Logger](https://www.home-assistant.io/integrations/logger/)
-component. See the configuration below to enable debug logging for this integration.
-
-```yaml
-logger:
-  default: warning
-  logs:
-    aiobiketrax: debug
-    custom_components.biketrax: debug
-```
-
-See the [README.md](https://github.com/basilfx/aiobiketrax/blob/master/README.md)
-of `aiobiketrax` for more information.
 
 ### Development version
 If you ever need to use a newer version of `aiobiketrax` with this integration,
