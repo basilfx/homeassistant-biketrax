@@ -51,6 +51,15 @@ the alarm are implemented.
 
 See https://github.com/nielsfaber/alarmo/issues/384 for more information.
 
+### Stolen mode
+When this integration was first introduced, there was a toggle in the PowUnity
+app to mark your bike as stolen. In the background, this toggled an attribute.
+
+This functionality seems to be removed from the PowUnity app, or but behind a
+an additional subscription. However, the entity is still provided by this
+integration, because it is unknonw if it is a removed feature, or only
+available with an additional subscription.
+
 ## References
 This custom component builds on top of
 [aiobiketrax](https://github.com/basilfx/aiobiketrax).
