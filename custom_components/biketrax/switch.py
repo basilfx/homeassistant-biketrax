@@ -105,10 +105,10 @@ class BikeTraxBinarySensor(BikeTraxBaseEntity, SwitchEntity):
         """Turn the entity on."""
         if not self.coordinator.read_only:
             await self.entity_description.set_fn(self.device, True)
-            await self.async_update_ha_state()
+            await self.async_write_ha_state()
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn the entity off."""
         if not self.coordinator.read_only:
             await self.entity_description.set_fn(self.device, False)
-            await self.async_update_ha_state()
+            await self.async_write_ha_state()
