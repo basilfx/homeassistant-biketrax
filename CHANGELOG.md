@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.1.1
+Released 30 August 2023
+
+Highlights:
+* Updated: upgrade to aiobiketrax v1.1.1.
+
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-biketrax/compare/v1.1.0...v1.1.1).
+
 ## v1.1.0
 Released 06 August 2023
 
