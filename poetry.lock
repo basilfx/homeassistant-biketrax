@@ -2,13 +2,13 @@
 
 [[package]]
 name = "aiobiketrax"
-version = "1.1.0"
+version = "1.1.1"
 description = "Python library for interacting with the PowUnity BikeTrax GPS tracker."
 optional = false
 python-versions = ">=3.9,<4.0"
 files = [
-    {file = "aiobiketrax-1.1.0-py3-none-any.whl", hash = "sha256:308ac879f18167fa31fbd7c82414fce215ebbab7e6aaf95a02e328bf5a1990fc"},
-    {file = "aiobiketrax-1.1.0.tar.gz", hash = "sha256:5992789f6b509f2ab406956a38090d0431f72110ec40fafde035d5b1dbfd873c"},
+    {file = "aiobiketrax-1.1.1-py3-none-any.whl", hash = "sha256:428be0339d7a76422f372315ceb67f7fdfd1d87480d1e4727c3f45893edf6095"},
+    {file = "aiobiketrax-1.1.1.tar.gz", hash = "sha256:9aa60d1d6d8481d04aed53c9cb34e0a1e6db0c7bb6d4c51c11c832960aa282c5"},
 ]
 
 [package.dependencies]
@@ -1731,4 +1731,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "efaf690c32919a1be1cb134e5796dd546365ae88b1bfafeb905eb6986860f0ca"
+content-hash = "9eec93392c94a7719cc81af29fb63a7e9dacd546f853920b52730e24cd4c2748"
