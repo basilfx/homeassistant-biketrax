@@ -24,7 +24,7 @@ homeassistant = "~2023.5.0"
 aiobiketrax = "1.1.1"
 
 [tool.poetry.dev-dependencies]
-black = "^23.7.0"
+black = "^23.9.1"
 flake8 = "^6.0.0"
 flake8-mypy = "^17.8.0"
 isort = "^5.12.0"
