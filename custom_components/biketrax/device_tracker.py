@@ -6,7 +6,7 @@ import logging
 from typing import Literal
 
 from aiobiketrax import Device
-from homeassistant.components.device_tracker import SOURCE_TYPE_GPS
+from homeassistant.components.device_tracker import SourceType
 from homeassistant.components.device_tracker.config_entry import TrackerEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -83,7 +83,7 @@ class BikeTraxDeviceTracker(BikeTraxBaseEntity, TrackerEntity):
     @property
     def source_type(self) -> Literal["gps"]:
         """Return the source type, e.g. gps or router, of the device."""
-        return SOURCE_TYPE_GPS
+        return SourceType.GPS
 
     @property
     def extra_state_attributes(self):

@@ -14,12 +14,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    LENGTH_KILOMETERS,
-    LENGTH_METERS,
-    PERCENTAGE,
-    SPEED_KILOMETERS_PER_HOUR,
-)
+from homeassistant.const import PERCENTAGE, UnitOfLength, UnitOfSpeed
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -63,7 +58,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         icon="mdi:speedometer",
         key="total_distance",
         name="Total distance",
-        native_unit_of_measurement=LENGTH_KILOMETERS,
+        native_unit_of_measurement=UnitOfLength.KILOMETERS,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     BikeTraxSensorEntityDescription(
@@ -72,7 +67,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         icon="mdi:speedometer",
         key="speed",
         name="Current speed",
-        native_unit_of_measurement=SPEED_KILOMETERS_PER_HOUR,
+        native_unit_of_measurement=UnitOfSpeed.KILOMETERS_PER_HOUR,
         state_class=SensorStateClass.MEASUREMENT,
     ),
     BikeTraxSensorEntityDescription(
@@ -107,7 +102,7 @@ SENSOR_TYPES: tuple[BikeTraxSensorEntityDescription, ...] = (
         icon="mdi:map-marker-distance",
         key="geofence_radius",
         name="Auto alarm geofence radius",
-        native_unit_of_measurement=LENGTH_METERS,
+        native_unit_of_measurement=UnitOfLength.METERS,
     ),
     BikeTraxSensorEntityDescription(
         coordinator=DATA_DEVICE,
