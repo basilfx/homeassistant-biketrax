@@ -1,4 +1,5 @@
 """Alarm control panel for BikeTrax devices."""
+
 from __future__ import annotations
 
 from aiobiketrax import Device
@@ -75,11 +76,15 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
         return (
             STATE_ALARM_TRIGGERED
             if self.device.is_guarded and self.device.is_alarm_triggered
-            else STATE_ALARM_ARMED_HOME
-            if self.device.is_guarded and self._is_home
-            else STATE_ALARM_ARMED_AWAY
-            if self.device.is_guarded
-            else STATE_ALARM_DISARMED
+            else (
+                STATE_ALARM_ARMED_HOME
+                if self.device.is_guarded and self._is_home
+                else (
+                    STATE_ALARM_ARMED_AWAY
+                    if self.device.is_guarded
+                    else STATE_ALARM_DISARMED
+                )
+            )
         )
 
     async def async_alarm_disarm(self, code: str | None = None) -> None:

@@ -1,4 +1,5 @@
 """Sensor entities for BikeTrax devices."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
