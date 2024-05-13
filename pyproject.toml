@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 88
-target-version = ["py39"]
+target-version = ["py312"]
 exclude = '''
 (
     \.git/
@@ -19,8 +19,8 @@ description = "Custom component for the PowUnity BikeTrax integration for Home A
 authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-homeassistant = "~2023.5.0"
+python = "~3.12"
+homeassistant = "~2024.4.0"
 aiobiketrax = "1.1.2"
 
 [tool.poetry.dev-dependencies]
