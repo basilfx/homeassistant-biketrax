@@ -58,8 +58,8 @@ class BikeTraxDeviceTracker(BikeTraxBaseEntity, TrackerEntity):
         """Initialize the tracker."""
         super().__init__(coordinator, device)
 
-        self._attr_unique_id = device.id
         self._attr_name = device.name
+        self._attr_unique_id = f"{device.id}-location"
 
     @property
     def battery_level(self) -> int | None:
