@@ -1,4 +1,5 @@
 """The BikeTrax integration."""
+
 from __future__ import annotations
 
 from asyncio import Event
