@@ -116,9 +116,13 @@ class BikeTraxBaseEntity(CoordinatorEntity[BikeTraxDataUpdateCoordinator]):
         self.device = device
 
         self._attr_device_info = DeviceInfo(
+            configuration_url="https://app.powunity.com/",
             identifiers={(DOMAIN, str(self.device.id))},
-            model=device.name,
+            manufacturer="PowUnity",
+            model="BikeTrax",
             name=device.name,
+            serial_number=device.unique_id,
+            sw_version=device.firmware_version,
         )
 
     async def async_added_to_hass(self) -> None:
