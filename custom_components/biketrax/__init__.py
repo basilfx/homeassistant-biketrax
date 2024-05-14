@@ -117,11 +117,11 @@ class BikeTraxBaseEntity(CoordinatorEntity[BikeTraxDataUpdateCoordinator]):
         self.device = device
 
         self._attrs: dict[str, Any] = {
-            "id": self.device.id,
+            "id": str(self.device.id),
             "name": self.device.name,
         }
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, self.device.id)},
+            identifiers={(DOMAIN, str(self.device.id))},
             model=device.name,
             name=device.name,
         )
