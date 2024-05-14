@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from asyncio import Event
-from typing import Any
 
 from aiobiketrax import Account, Device
 from homeassistant.config_entries import ConfigEntry
@@ -116,10 +115,6 @@ class BikeTraxBaseEntity(CoordinatorEntity[BikeTraxDataUpdateCoordinator]):
 
         self.device = device
 
-        self._attrs: dict[str, Any] = {
-            "id": str(self.device.id),
-            "name": self.device.name,
-        }
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, str(self.device.id))},
             model=device.name,
