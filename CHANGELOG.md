@@ -1,7 +1,7 @@
 # Changelog
 
-## v2.0.0b1
-Unreleased
+## v2.0.0
+Released 21 May 2024
 
 Highlights:
 * Updated: upgrade to aiobiketrax v1.3.0 to address several API changes.
@@ -10,7 +10,9 @@ Highlights:
 * Fixed: use new const data types for units and data sources.
 * Fixed: switch entities could not be toggled.
 
-The full list of commits can be found [here](https://github.com/basilfx/homeassistant-biketrax/compare/v1.1.2...v2.0.0b1).
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-biketrax/compare/v1.1.2...v2.0.0).
+
+This release supersedes v2.0.0b1.
 
 ## v1.1.2
 Released 1 January 2024
