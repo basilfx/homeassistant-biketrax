@@ -14,7 +14,7 @@ profile = "black"
 
 [tool.poetry]
 name = "homeassistant-biketrax"
-version = "2.0.0b1"
+version = "2.0.0"
 description = "Custom component for the PowUnity BikeTrax integration for Home Assistant."
 authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
 package-mode = false
