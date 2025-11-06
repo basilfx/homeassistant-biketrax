@@ -7,14 +7,9 @@ from homeassistant.components.alarm_control_panel import DOMAIN as ALARM_DOMAIN
 from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity
 from homeassistant.components.alarm_control_panel.const import (
     AlarmControlPanelEntityFeature,
+    AlarmControlPanelState,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    STATE_ALARM_ARMED_AWAY,
-    STATE_ALARM_ARMED_HOME,
-    STATE_ALARM_DISARMED,
-    STATE_ALARM_TRIGGERED,
-)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -74,15 +69,15 @@ class BikeTraxAlarmController(BikeTraxBaseEntity, AlarmControlPanelEntity):
     def state(self):
         """Return the state of the device."""
         return (
-            STATE_ALARM_TRIGGERED
+            AlarmControlPanelState.TRIGGERED
             if self.device.is_guarded and self.device.is_alarm_triggered
             else (
-                STATE_ALARM_ARMED_HOME
+                AlarmControlPanelState.ARMED_HOME
                 if self.device.is_guarded and self._is_home
                 else (
-                    STATE_ALARM_ARMED_AWAY
+                    AlarmControlPanelState.ARMED_AWAY
                     if self.device.is_guarded
-                    else STATE_ALARM_DISARMED
+                    else AlarmControlPanelState.DISARMED
                 )
             )
         )
