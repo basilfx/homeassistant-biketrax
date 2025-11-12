@@ -9,7 +9,6 @@ import voluptuous as vol
 from aiobiketrax import Account, exceptions
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import aiohttp_client
 
@@ -65,7 +64,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> config_entries.ConfigFlowResult:
         """Handle the initial step."""
         if user_input is None:
             return self.async_show_form(
@@ -96,28 +95,23 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @callback
     def async_get_options_flow(
         config_entry: config_entries.ConfigEntry,
-    ) -> BikeTraxOptionsFlow:
+    ) -> BikeTraxOptionsFlowHandler:
         """Return a BikeTrax option flow."""
-        return BikeTraxOptionsFlow(config_entry)
+        return BikeTraxOptionsFlowHandler()
 
 
-class BikeTraxOptionsFlow(config_entries.OptionsFlow):
+class BikeTraxOptionsFlowHandler(config_entries.OptionsFlow):
     """Handle a option flow for BikeTrax."""
-
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        """Initialize BikeTrax option flow."""
-        self.config_entry = config_entry
-        self.options = dict(config_entry.options)
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> config_entries.ConfigFlowResult:
         """Manage the options."""
         return await self.async_step_account_options()
 
     async def async_step_account_options(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> config_entries.ConfigFlowResult:
         """Handle the initial step."""
         if user_input is not None:
             # Manually update & reload the config entry after options change.
