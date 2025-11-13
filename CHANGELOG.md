@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.1.0
+Released 13 November 2025
+
+Highlights:
+* Updated: dependency upgrades (Home Assistant 2025.10 or newer).
+* Fixed: remove deprecated constants for Home Assistant 2025.11 compatibility.
+* Fixed: updated config flow initialization for Home Assistant 2025.12 compatibility.
+
+The full list of commits can be found [here](https://github.com/basilfx/homeassistant-biketrax/compare/v2.0.1...v2.1.0).
+
 ## v2.0.1
 Released 5 August 2024
 
