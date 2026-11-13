@@ -1,32 +1,32 @@
-[tool.black]
-line-length = 88
-target-version = ["py313"]
-exclude = '''
-(
-    \.git/
-  | \.vscode/
-  | env/
-)
-'''
-
-[tool.isort]
-profile = "black"
-
-[tool.poetry]
+[project]
 name = "homeassistant-biketrax"
 version = "2.1.0"
 description = "Custom component for the PowUnity BikeTrax integration for Home Assistant."
-authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
-package-mode = false
+authors = [{ name = "Bas Stottelaar", email = "basstottelaar@gmail.com" }]
+requires-python = ">=3.13.2,<3.14"
+dependencies = [
+    "homeassistant>=2025.10.0,<2025.11",
+    "aiobiketrax==1.3.1",
+]
 
-[tool.poetry.dependencies]
-python = "~3.13.2"
-homeassistant = "~2025.10.0"
-aiobiketrax = "1.3.1"
+[tool.uv]
+package = false
 
-[tool.poetry.group.dev.dependencies]
-black = "^25.9.0"
-flake8 = "^7.0.0"
-isort = "^7.0.0"
-pytest = "^8.2"
-mypy = "^1.10.0"
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+extend-exclude = ["env"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.mypy]
+python_version = "3.13"
+files = ["custom_components/biketrax", "tests"]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
